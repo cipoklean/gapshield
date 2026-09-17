@@ -1,0 +1,44 @@
+{
+  "driverChecks": [
+    {
+      "index": 0,
+      "title": "China export restrictions on semiconductor components affecting iPhone supply chain",
+      "status": "UNGROUNDED",
+      "note": "Cited headline indices out of range"
+    },
+    {
+      "index": 1,
+      "title": "Federal Reserve meeting minutes signal potential rate hike delay",
+      "status": "UNGROUNDED",
+      "note": "Cited headline indices out of range"
+    },
+    {
+      "index": 2,
+      "title": "EU regulatory scrutiny on App Store policies intensifying",
+      "status": "UNGROUNDED",
+      "note": "Cited headline indices out of range"
+    }
+  ],
+  "priceChecks": [
+    {
+      "label": "Price audit skipped - quote unavailable",
+      "status": "SKIPPED",
+      "note": "Live price unavailable"
+    }
+  ],
+  "parallelCheck": {
+    "period": "January 2023",
+    "event": "China export restrictions on semiconductor components",
+    "marketReaction": "AAPL dropped 4.2% on Monday open after weekend restriction news",
+    "status": "VERIFIED",
+    "dbMagnitude": "-4.2%"
+  },
+  "modelConfidence": 60,
+  "calibratedConfidence": 60,
+  "verificationRate": 0,
+  "totalChecks": 5,
+  "passedChecks": 1,
+  "evaluableChecks": 1,
+  "corrections": [],
+  "uncalibrated": false
+}

@@ -1,0 +1,58 @@
+{
+  "driverChecks": [
+    {
+      "index": 0,
+      "title": "OPEC+ unexpected production cut announcement affects EV demand outlook",
+      "status": "VERIFIED",
+      "note": "Source match: 52% overlap"
+    },
+    {
+      "index": 1,
+      "title": "China EV competitor BYD announces aggressive pricing strategy",
+      "status": "VERIFIED",
+      "note": "Source match: 45% overlap"
+    },
+    {
+      "index": 2,
+      "title": "EU anti-subsidy investigation into Chinese EV imports could impact Tesla Gigafactory Berlin",
+      "status": "UNGROUNDED",
+      "note": "Low source overlap: 18%"
+    }
+  ],
+  "priceChecks": [
+    {
+      "label": "Price audit: $180 vs live quote $245",
+      "extractedValue": 180,
+      "livePrice": 245.32,
+      "ratio": 0.73,
+      "status": "VERIFIED",
+      "note": "Level at 26.6% below live price"
+    },
+    {
+      "label": "Price audit: $150 vs live quote $245",
+      "extractedValue": 150,
+      "livePrice": 245.32,
+      "ratio": 0.61,
+      "status": "CORRECTED",
+      "correction": "Auto-corrected from $150 to $226",
+      "note": "Ratio 0.61 outside [0.5, 1.5] bounds"
+    }
+  ],
+  "parallelCheck": {
+    "period": "October 2022",
+    "event": "OPEC+ surprise production cuts announced over weekend",
+    "marketReaction": "TSLA gapped down 6.8% on Monday after energy cost concerns",
+    "status": "VERIFIED",
+    "dbMagnitude": "-6.8%"
+  },
+  "modelConfidence": 88,
+  "calibratedConfidence": 75,
+  "verificationRate": 0.75,
+  "totalChecks": 8,
+  "passedChecks": 6,
+  "evaluableChecks": 6,
+  "corrections": [
+    "Auto-corrected from $150 to $226"
+  ],
+  "uncalibrated": false
+}
