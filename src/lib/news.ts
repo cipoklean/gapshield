@@ -30,12 +30,17 @@ const TickerQueries: Record<string, string> = {
   MSFT: "MSFT stock Microsoft earnings cloud AI regulation",
   AMZN: "AMZN stock Amazon earnings retail AWS regulation",
   META: "META stock Meta earnings AI regulation antitrust",
+  QQQ: "QQQ ETF Nasdaq-100 tech stocks earnings Fed",
+  SPY: "SPY ETF S&P 500 stocks market weekend earnings",
 };
 
-const GenericQuery = "US stock market weekend news earnings regulation";
-
+// No longer used — all tickers now get ticker-specific queries.
 export function getQueryForTicker(ticker: string): string {
-  return TickerQueries[ticker.toUpperCase()] || GenericQuery;
+  // Universal ticker-specific query works for any ticker — including all 500+ rTokens.
+  // The elaborate queries below are a curated enhancement for known tickers only.
+  const upper = ticker.toUpperCase();
+  if (TickerQueries[upper]) return TickerQueries[upper];
+  return `${upper} stock news`;
 }
 
 const SIMPLE_QUERY_TIMEOUT = 8000;
