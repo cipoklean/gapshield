@@ -217,6 +217,7 @@ export async function generateShieldReport(ticker: string): Promise<ShieldReport
 
   // FIX 4: Attempt Qwen whenever key is configured, even if RSS returned zero headlines
   const hasKey = !!process.env.QWEN_API_KEY;
+  console.info(`[GenerateReport] hasKey=`, hasKey, `QWEN_BASE_URL=`, process.env.QWEN_BASE_URL);
   const llmResult = hasKey ? await callQwenLLM({
     ticker: tickerUpper,
     headlines: news,
@@ -228,7 +229,11 @@ export async function generateShieldReport(ticker: string): Promise<ShieldReport
   if (llmResult.ok && llmResult.output && validateLLMOutput(llmResult.output)) {
     llmOutput = llmResult.output;
     modelType = "Qwen";
-    console.info("[GenerateReport] Qwen synthesis complete");
+    console.info(`[GenerateReport] llmResult:`, JSON.stringify({
+      ok: llmResult.ok,
+      reason: llmResult.reason,
+      hasOutput: !!(llmResult.output)
+    }));
   } else if (hasKey) {
     // Key was configured but synthesis failed — transparent fallback messaging
     qwenFailedReason = llmResult.reason;
