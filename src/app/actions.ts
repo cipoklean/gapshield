@@ -2,6 +2,8 @@
  * Generate Weekend Shield Report — Real Data + AI Synthesis + Verification
  */
 
+"use server";
+
 import { fetchNews, NewsItem } from "@/lib/news";
 import { fetchLivePrice, PriceData } from "@/lib/prices";
 import { callQwenLLM, LLMOutput, KeyDriverWithSources } from "@/lib/llm";
