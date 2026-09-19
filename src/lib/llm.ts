@@ -102,7 +102,7 @@ Return ONLY valid JSON matching this schema:
 
 Return ONLY the JSON object. No markdown, no explanation.`;
 
-const DEFAULT_TIMEOUT_MS = 15000;
+const DEFAULT_TIMEOUT_MS = 30000;
 
 export async function callQwenLLM(input: LLMInput): Promise<LLMResult> {
   const apiKey = process.env.QWEN_API_KEY;
