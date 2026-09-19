@@ -102,21 +102,36 @@ export function heuristicAnalyze(
     url: h.link,
   }));
 
-  // Generate action checklist with price-aware levels
+  // Generate action checklist — only emit dollar levels when we have a real price.
+  // Without a live quote, we do NOT fabricate price levels (would mislead the user).
   const actionChecklist: string[] = [];
-  const priceLevel = livePrice?.price || 180; // Default fallback
+  const priceLevel = livePrice?.price;
+  const hasPrice = priceLevel != null && isFinite(priceLevel) && priceLevel > 0;
 
   if (bias === "Bearish") {
-    actionChecklist.push(`Consider reducing position size by 20-30% ahead of Monday open`);
-    actionChecklist.push(`Set stop-loss orders at $${Math.round(priceLevel * 0.92)} support level`);
+    actionChecklist.push("Consider reducing position size by 20-30% ahead of Monday open");
+    if (hasPrice) {
+      actionChecklist.push(`Set stop-loss orders at $${Math.round(priceLevel * 0.92)} support level`);
+    } else {
+      actionChecklist.push("Set stop-loss orders at a level derived from the live quote (price unavailable)");
+    }
     actionChecklist.push("Monitor Asian pre-market futures for overnight sentiment shift");
   } else if (bias === "Bullish") {
     actionChecklist.push("Maintain current positions with wider stops");
-    actionChecklist.push(`Consider adding on any dip below $${Math.round(priceLevel * 0.95)}`);
-    actionChecklist.push(`Watch for resistance at $${Math.round(priceLevel * 1.05)}`);
+    if (hasPrice) {
+      actionChecklist.push(`Consider adding on any dip below $${Math.round(priceLevel * 0.95)}`);
+      actionChecklist.push(`Watch for resistance at $${Math.round(priceLevel * 1.05)}`);
+    } else {
+      actionChecklist.push("Consider adding on any dip below a level derived from the live quote (price unavailable)");
+      actionChecklist.push("Watch for resistance at a level derived from the live quote (price unavailable)");
+    }
   } else {
     actionChecklist.push("Review portfolio allocation for weekend exposure");
-    actionChecklist.push(`Set conservative stop-loss at $${Math.round(priceLevel * 0.90)}`);
+    if (hasPrice) {
+      actionChecklist.push(`Set conservative stop-loss at $${Math.round(priceLevel * 0.90)}`);
+    } else {
+      actionChecklist.push("Set conservative stop-loss at a level derived from the live quote (price unavailable)");
+    }
     actionChecklist.push("Wait for Monday morning clarity before adjusting positions");
   }
 

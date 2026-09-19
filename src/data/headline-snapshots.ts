@@ -16,7 +16,7 @@ export const HEADLINE_SNAPSHOTS: Record<string, CachedHeadline[]> = {
     {
       title: "Apple faces new China export restrictions on semiconductor components",
       link: "https://news.google.com/search?q=AAPL+China+restrictions",
-      source: "Reuters (cached)",
+      source: "Reuters (cached snapshot — demo)",
     },
     {
       title: "Federal Reserve signals potential rate hike delay into Q2",
@@ -235,6 +235,6 @@ const KO_SNAPSHOT: CachedHeadline[] = [
 
 export function getHeadlineSnapshot(ticker: string): CachedHeadline[] {
   const upper = ticker.toUpperCase();
-  if (upper === "KO") return KO_SNAPSHOT;
-  return HEADLINE_SNAPSHOTS[upper] || GENERIC_SNAPSHOT;
+  const snapshots = upper === "KO" ? KO_SNAPSHOT : (HEADLINE_SNAPSHOTS[upper] || GENERIC_SNAPSHOT);
+  return snapshots.map(s => ({ ...s, source: s.source.replace(" (cached)", " (cached snapshot — demo)") }));
 }

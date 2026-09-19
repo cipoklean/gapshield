@@ -72,7 +72,7 @@ export function ShieldReportCard({ report }: ShieldReportCardProps) {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
           <div>
-            <div className="label-mono mb-3">Monday Morning Shield Report</div>
+            <div className="label-mono mb-3">{report.livePrice ? "Live Price Shield Report" : "Weekend Risk Report"}</div>
             <h3 className="headline text-5xl md:text-6xl text-ink">{report.ticker}</h3>
             {report.symbolMapped && report.symbolFrom && (
               <div className="mt-2 px-3 py-1.5 rounded-full bg-gold/10 border border-gold/30 inline-flex items-center gap-2">
