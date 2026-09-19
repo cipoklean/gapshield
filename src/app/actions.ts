@@ -171,9 +171,10 @@ export interface ReportWithSymbols extends ShieldReport {
 }
 
 export async function generateShieldReport(ticker: string): Promise<ShieldReport> {
-  // ── FIX 1: Symbol normalization
-  const originalInput = ticker.trim();
-  const normalized = normalizeSymbol(originalInput);
+  try {
+    // ── FIX 1: Symbol normalization
+    const originalInput = ticker.trim();
+    const normalized = normalizeSymbol(originalInput);
 
   if (normalized.unknown && !process.env.QWEN_API_KEY) {
     // Unknown symbol with no API key — return empty to trigger UI warning
@@ -348,4 +349,8 @@ export async function generateShieldReport(ticker: string): Promise<ShieldReport
   await new Promise(resolve => setTimeout(resolve, 1800));
 
   return report;
+  } catch (err) {
+    console.error('[GenerateReport] Unhandled error:', err);
+    throw err;
+  }
 }

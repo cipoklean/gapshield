@@ -34,6 +34,7 @@ export default function AnalyzeSection() {
   }, []);
 
   const handleAnalyze = async (ticker: string) => {
+    console.log('[AnalyzeSection] handleAnalyze called with:', ticker);
     setLoading(true);
     setError(null);
     setReport(null);
@@ -42,6 +43,8 @@ export default function AnalyzeSection() {
     // Pick up any pending ticker from a "Did you mean?" click while loading
     const resolvedTicker = pendingTickerRef.current || ticker;
     pendingTickerRef.current = null;
+
+    console.log('[AnalyzeSection] Resolved ticker:', resolvedTicker);
 
     // Animate pipeline steps
     const stepInterval = setInterval(() => {
